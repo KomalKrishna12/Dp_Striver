@@ -28,10 +28,36 @@ public class Q3_Frog_jump {
         for(int i = 0; i < n; i++) heights[i] = scn.nextInt();
         scn.close();
         
-        int[] dp = new int[n+1];
-        Arrays.fill(dp, -1);
+        // memoization
+        // int[] dp = new int[n+1];
+        // Arrays.fill(dp, -1);
 
-        System.out.println(solve(n-1, dp, heights));
+        // System.out.println(solve(n-1, dp, heights));
 
+        // tabulation
+        // int[] dp = new int[n]; // taking n as size bcoz we are doing 0 based indexing 
+        // dp[0] = 0;
+        // for(int i = 1; i < n; i++){
+        //     int fs = dp[i-1] + Math.abs(heights[i] - heights[i-1]); // first step
+        //     int ss = Integer.MAX_VALUE;
+        //     if(i > 1) ss = dp[i-2] + Math.abs(heights[i] - heights[i-2]); // second step
+
+        //     dp[i] = Math.min(fs, ss);
+        // }
+
+        // System.out.println(dp[n-1]);
+
+        // optiized of sc as o(1)
+        // use three variables
+        int prev1 = 0, prev2 = 0;
+        for(int i = 1; i < n; i++){
+            int fs = prev1 + Math.abs(heights[i] - heights[i-1]);
+            int ss = Integer.MAX_VALUE;
+            if(i > 1) ss = prev2 + Math.abs(heights[i] - heights[i-2]);
+            int curr = Math.min(fs, ss);
+            prev2 = prev1;
+            prev1 = curr;
+        }
+        System.out.println(prev1);
     }
 }
