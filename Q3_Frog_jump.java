@@ -1,4 +1,8 @@
 import java.util.*;
+// in the qustion we have given n staricase and height array which contains energy at each staris
+// their is frog wh can jump either 1 step or 2 step and lost some energy
+// if frog go to jth stair from ith stair then energy used by frog will be abs of height[j] - height[i]
+// so frog want to go to nth satir by using min energy
 public class Q3_Frog_jump {
 
     public static int solve(int n, int[] dp, int[] heights){
@@ -6,8 +10,10 @@ public class Q3_Frog_jump {
         if(n == 0) return 0;
         if(dp[n] != -1) return dp[n];
 
-        int left = solve(n-1, dp, heights) + Math.abs(heights[n] - heights[n-1]);
+        int left = solve(n-1, dp, heights) + Math.abs(heights[n] - heights[n-1]); // for one step jump
         int right = Integer.MAX_VALUE;
+        // for 2 step jump, so it is compulosory to check wheather index is greater than 1 or not
+        // otherwise we will get array out of bound exception
         if(n > 1) right = solve(n-2, dp, heights) + Math.abs(heights[n-2] - heights[n]);
 
         return dp[n] = Math.min(left, right);
