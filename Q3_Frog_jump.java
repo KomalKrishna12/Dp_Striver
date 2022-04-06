@@ -7,7 +7,8 @@ public class Q3_Frog_jump {
         if(dp[n] != -1) return dp[n];
 
         int left = solve(n-1, dp, heights) + Math.abs(heights[n] - heights[n-1]);
-        int right = solve(n-2, dp, heights) + Math.abs(heights[n-2] - heights[n]);
+        int right = Integer.MAX_VALUE;
+        if(n > 1) right = solve(n-2, dp, heights) + Math.abs(heights[n-2] - heights[n]);
 
         return dp[n] = Math.min(left, right);
 
@@ -24,7 +25,7 @@ public class Q3_Frog_jump {
         int[] dp = new int[n+1];
         Arrays.fill(dp, -1);
 
-        System.out.println(solve(n, dp, heights));
+        System.out.println(solve(n-1, dp, heights));
 
     }
 }
