@@ -30,10 +30,26 @@ public class Q4_Frog_jump_with_k_distance {
         scn.close();
 
         // memoization
-        int[] dp = new int[n];
-        Arrays.fill(dp, -1);
+        // int[] dp = new int[n];
+        // Arrays.fill(dp, -1);
 
-        System.out.println(solve(n-1, k, dp, heights));
+        // System.out.println(solve(n-1, k, dp, heights));
+
+        // tabulation
+        int[] dp = new int[n];
+        dp[0] = 0;
+
+        for(int i = 1; i < n; i++){
+            int minStep = Integer.MAX_VALUE;
+            for(int j = 1; j <= k; j++){
+                if(i-j >= 0){
+                    int jump = dp[i - j] + Math.abs(heights[i] - heights[i - j]); 
+                    minStep = Math.min(minStep, jump); 
+                }
+            }
+            dp[i] = minStep;
+        }
+        System.out.println(dp[n-1]);
 
     }
 }
