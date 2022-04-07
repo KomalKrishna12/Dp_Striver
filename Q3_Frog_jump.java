@@ -14,7 +14,7 @@ public class Q3_Frog_jump {
         int right = Integer.MAX_VALUE;
         // for 2 step jump, so it is compulosory to check wheather index is greater than 1 or not
         // otherwise we will get array out of bound exception
-        if(n > 1) right = solve(n-2, dp, heights) + Math.abs(heights[n-2] - heights[n]);
+        if(n - 2 >= 0) right = solve(n-2, dp, heights) + Math.abs(heights[n-2] - heights[n]);
 
         return dp[n] = Math.min(left, right);
 
