@@ -68,25 +68,48 @@ public class Q7_Ninjas_training {
         // now intialize dp[day]][last] as 0 and craete a loop for task from 0 to 3
         // if the task is not used at last then use the current task point and call for prev day by telling
         // i'm using that task
-        int[][] dp = new int[n][4];
-        dp[0][0] = Math.max(points[0][1], points[0][2]);
-        dp[0][1] = Math.max(points[0][0], points[0][2]);
-        dp[0][2] = Math.max(points[0][0], points[0][1]);
-        dp[0][3] = Math.max(points[0][0], Math.max(points[0][1], points[0][2]));
+        // int[][] dp = new int[n][4];
+        // dp[0][0] = Math.max(points[0][1], points[0][2]);
+        // dp[0][1] = Math.max(points[0][0], points[0][2]);
+        // dp[0][2] = Math.max(points[0][0], points[0][1]);
+        // dp[0][3] = Math.max(points[0][0], Math.max(points[0][1], points[0][2]));
+
+        // for(int day = 1; day < n; day++){
+        //     for(int last = 0; last < 4; last++){
+        //         dp[day][last] = 0;
+        //         for(int task = 0; task < 3; task++){
+        //             if(task != last){
+        //                 int point = points[day][task] + dp[day - 1][task]; 
+        //                 dp[day][last] = Math.max(dp[day][last], point);
+        //             }
+        //         }
+        //     }
+        // }
+
+        // System.out.println(dp[n-1][3]);
+
+        // now we can optimized the space
+        // as we are able to see to calculate dp[day][task] we want dp[day-1][task]
+        // only want prev row so we can use a 1D array instead of 2D
+        int[] dp = new int[4];
+        dp[0] = Math.max(points[0][1], points[0][2]);
+        dp[1] = Math.max(points[0][0], points[0][2]);
+        dp[2] = Math.max(points[0][0], points[0][1]);
+        dp[3] = Math.max(points[0][0], Math.max(points[0][1], points[0][2]));
 
         for(int day = 1; day < n; day++){
+            int[] temp = new int[4];
             for(int last = 0; last < 4; last++){
-                dp[day][last] = 0;
+                temp[last] = 0;
                 for(int task = 0; task < 3; task++){
                     if(task != last){
-                        int point = points[day][task] + dp[day - 1][task]; 
-                        dp[day][last] = Math.max(dp[day][last], point);
+                        temp[last] = Math.max(temp[last], points[day][task] + dp[task]);
                     }
                 }
             }
+            dp = temp;
         }
-
-        System.out.println(dp[n-1][3]);
+        System.out.println(dp[3]);
     }
 
     public static int helper2(int day, int last, int[][] points, int[][] dp){
