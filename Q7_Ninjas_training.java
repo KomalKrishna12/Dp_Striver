@@ -59,6 +59,15 @@ public class Q7_Ninjas_training {
         // System.out.println(helper2(n-1, 3, points, dp));
 
         // now tabulation method
+        // so create a dp of size n*4
+        // in base case of memoization we use n == 0 we put max of all tasks without using the
+        // last task, doing same here
+        // and in dp[0][3] put max of all taks
+        // now start loop for day start from 1
+        // inside in start loop for last from 0 to 4
+        // now intialize dp[day]][last] as 0 and craete a loop for task from 0 to 3
+        // if the task is not used at last then use the current task point and call for prev day by telling
+        // i'm using that task
         int[][] dp = new int[n][4];
         dp[0][0] = Math.max(points[0][1], points[0][2]);
         dp[0][1] = Math.max(points[0][0], points[0][2]);
