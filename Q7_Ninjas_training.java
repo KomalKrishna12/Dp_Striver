@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 // some ninjas are in training of n days where they have to trains in 3 practices
@@ -53,12 +52,32 @@ public class Q7_Ninjas_training {
         // but in recursion we are using two variables daya and last so we have to create 2D array
         // row size will be n and col size will be 4, 4 bcoz we have 3 skills from 0 to 2 and we have option
         // 3 that means we haven't use any task 
+        // int[][] dp = new int[n][4];
+        // for(int i = 0; i < n; i++){
+        //     Arrays.fill(dp[i], -1);
+        // }
+        // System.out.println(helper2(n-1, 3, points, dp));
+
+        // now tabulation method
         int[][] dp = new int[n][4];
-        for(int i = 0; i < n; i++){
-            Arrays.fill(dp[i], -1);
+        dp[0][0] = Math.max(dp[0][1], dp[0][2]);
+        dp[0][1] = Math.max(dp[0][0], dp[0][2]);
+        dp[0][2] = Math.max(dp[0][0], dp[0][1]);
+        dp[0][3] = Math.max(dp[0][0], Math.max(dp[0][1], dp[0][2]));
+
+        for(int day = 1; day < n; day++){
+            for(int last = 0; last < 4; last++){
+                dp[day][last] = 0;
+                for(int task = 0; task < 3; task++){
+                    if(task != last){
+                        int point = points[day][task] + dp[day - 1][task];
+                        dp[day][last] = Math.max(dp[day][last], point);
+                    }
+                }
+            }
         }
-        System.out.println(helper2(n-1, 3, points, dp));
-        
+
+        System.out.println(dp[n-1][3]);
     }
 
     public static int helper2(int day, int last, int[][] points, int[][] dp){
