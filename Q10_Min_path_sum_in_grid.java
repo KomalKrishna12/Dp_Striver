@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 // in this problem we have given a grid of m*n each box contains an amount
@@ -23,13 +22,54 @@ public class Q10_Min_path_sum_in_grid {
 
         // System.out.println(helper(m-1, n-1, grid));
 
-        int[][] dp = new int[m][n];
+        // int[][] dp = new int[m][n];
 
+        // for(int i = 0; i < m; i++){
+        //     Arrays.fill(dp[i], -1);
+        // }
+
+        // System.out.println(helper2(m-1, n-1, grid, dp));
+
+        // tabulation
+        // int[][] dp = new int[m][n];
+        // for(int i = 0; i < m; i++){
+        //     for(int j = 0; j < n; j++){
+        //         if(i == 0 && j == 0) dp[i][j] = grid[i][j];
+        //         else{
+        //             int up = grid[i][j];
+        //             if(i > 0) up += dp[i-1][j];
+        //             else up += (int)Math.pow(10, 9);
+
+        //             int left = grid[i][j];
+        //             if(j > 0) left += dp[i][j-1];
+        //             else left += (int)Math.pow(10, 9);
+
+        //             dp[i][j] = Math.min(up, left);
+        //         }
+        //     }
+        // }
+        // System.out.println(dp[m-1][n-1]);
+
+        int[] prev = new int[n];
         for(int i = 0; i < m; i++){
-            Arrays.fill(dp[i], -1);
-        }
+            int[] curr = new int[n];
+            for(int j = 0; j < n; j++){
+                if(i == 0 && j == 0) curr[j] = grid[i][j];
+                else{
+                    int up = grid[i][j];
+                    if(i > 0) up += prev[j];
+                    else up += (int)Math.pow(10, 9);
 
-        System.out.println(helper2(m-1, n-1, grid, dp));
+                    int left = grid[i][j];
+                    if(j > 0) left += curr[j-1];
+                    else left += (int)Math.pow(10, 9);
+
+                    curr[j] = Math.min(up, left);
+                }
+            }
+            prev = curr;
+        }
+        System.out.println(prev[n-1]);
     }
 
     public static int helper(int i, int j, int[][] grid){
