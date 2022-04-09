@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 // in this question we have given a m*n grid we are at top left and we've to reach bottom right
@@ -28,9 +28,24 @@ public class Q8_Grid_unique_path {
         // System.out.println(helper(m-1, n-1));
 
         // memoization
+        // int[][] dp = new int[m][n];
+        // for(int i = 0; i < dp.length; i++) Arrays.fill(dp[i], -1);
+        // System.out.println(helper2(m-1, n-1, dp));
+
+        // tabulation
         int[][] dp = new int[m][n];
-        for(int i = 0; i < dp.length; i++) Arrays.fill(dp[i], -1);
-        System.out.println(helper2(m-1, n-1, dp));
+        for(int i = 0; i < dp.length; i++){
+            for(int j = 0; j < dp[i].length; j++){
+                if(i == 0 && j == 0) dp[i][j] = 1;
+                else{
+                    int up = 0, left = 0;
+                    if(i > 0) up = dp[i-1][j];
+                    if(j > 0) left = dp[i][j-1];
+                    dp[i][j] = up + left;
+                }
+            }
+        }
+        System.out.println(dp[m-1][n-1]);
 
     }
 
