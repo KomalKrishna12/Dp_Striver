@@ -33,19 +33,42 @@ public class Q8_Grid_unique_path {
         // System.out.println(helper2(m-1, n-1, dp));
 
         // tabulation
-        int[][] dp = new int[m][n];
-        for(int i = 0; i < dp.length; i++){
-            for(int j = 0; j < dp[i].length; j++){
-                if(i == 0 && j == 0) dp[i][j] = 1;
+        // int[][] dp = new int[m][n];
+        // for(int i = 0; i < dp.length; i++){
+        //     for(int j = 0; j < dp[i].length; j++){
+        //         if(i == 0 && j == 0) dp[i][j] = 1;
+        //         else{
+        //             int up = 0, left = 0;
+        //             if(i > 0) up = dp[i-1][j];
+        //             if(j > 0) left = dp[i][j-1];
+        //             dp[i][j] = up + left;
+        //         }
+        //     }
+        // }
+        // System.out.println(dp[m-1][n-1]);
+
+        // now we can space optimized it by using 1d array
+        // to calculate curr value we need just one row prev arr value
+        // and same row prev col value
+        // so create a dp[n] n is column size
+        // craete a temp array and to calculate ith index of temp[i] = dp[i] + temp[i-1]
+        // dp[i] is prev row ith col value which denotes up
+        // temp[i-1] is left value which denotes same row prev col value which is basically left
+        int[] dp = new int[n];
+        for(int i = 0; i < m; i++){
+            int[] temp = new int[n];
+            for(int j = 0; j < n; j++){
+                if(i == 0 && j == 0) temp[j] = 1;
                 else{
                     int up = 0, left = 0;
-                    if(i > 0) up = dp[i-1][j];
-                    if(j > 0) left = dp[i][j-1];
-                    dp[i][j] = up + left;
+                    if(i > 0) up = dp[j];
+                    if(j > 0) left = temp[j-1];
+                    temp[j] = up + left;
                 }
             }
-        }
-        System.out.println(dp[m-1][n-1]);
+            dp = temp;
+        } 
+        System.out.println(dp[n-1]);
 
     }
 
