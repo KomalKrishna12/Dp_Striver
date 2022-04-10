@@ -1,3 +1,5 @@
+// import java.util.Arrays;
+
 // in this question we given a triangle in the ith row i+1 elements are their
 // like for 0th we have 1 element, for 1th we have 2 elements
 // we can traverse to down or diagonal means at (i+1, j) or (i+1,j+1)
@@ -22,6 +24,22 @@ public class Q11_Triangle {
 
     }
 
+    public static int minimumPathSum2(int i, int j, int[][] triangle, int[][] dp, int n){
+
+        if(i == n-1){
+            return dp[i][j] = triangle[n-1][j];
+        }
+
+        if(dp[i][j] != -1) return dp[i][j];
+
+        int down = triangle[i][j] + minimumPathSum2(i+1, j, triangle, dp, n);
+
+        int diagonal = triangle[i][j] + minimumPathSum2(i+1, j+1, triangle, dp, n);
+
+        return dp[i][j] = Math.min(down, diagonal);
+
+    }
+
     public static void main(String[] args) {
 
         int triangle[][] = { { 1 },
@@ -31,7 +49,47 @@ public class Q11_Triangle {
 
         int n = triangle.length;
 
-        System.out.println(minimumPathSum(0, 0, triangle, n));
+        // recusion
+        // pass (0,0) and start seaching min path
+        // System.out.println(minimumPathSum(0, 0, triangle, n));
 
+        // memoization
+        // int[][] dp = new int[n][n];
+        // for(int i = 0; i < n; i++) Arrays.fill(dp[i], -1); // fill all with -1
+        // System.out.println(minimumPathSum2(0, 0, triangle, dp, n));
+
+        // tabulation
+        // since in memoization and recusion we started from 0,0 but it is bottom up only
+        // in base case will filles last row with the value of last row of triangle
+        // so we've to fill our dp last row with the same
+
+        // int[][] dp = new int[n][n];
+        // for(int j = 0; j < n; j++) dp[n-1][j] = triangle[n-1][j];
+
+        // for(int i = n-2; i >= 0; i--){
+        //     for(int j = i; j >= 0; j--){
+        //         int down = triangle[i][j] + dp[i+1][j];
+        //         int diag = triangle[i][j] + dp[i+1][j+1];
+        //         dp[i][j] = Math.min(down, diag);
+        //     }
+        // }
+
+        // System.out.println(dp[0][0]);
+
+        // space optimization
+        int[] prev = new int[n];
+        for(int j = 0; j < n; j++) prev[j] = triangle[n-1][j];
+
+        for(int i = n-2; i >= 0; i--){
+            int[] curr = new int[n];
+            for(int j = i; j >= 0; j--){
+                int down = triangle[i][j] + prev[j];
+                int diag = triangle[i][j] + prev[j+1];
+                curr[j] = Math.min(down, diag);
+            }
+            prev = curr;
+        }
+
+        System.out.println(prev[0]);
     }
 }
