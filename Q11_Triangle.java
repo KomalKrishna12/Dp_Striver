@@ -1,4 +1,4 @@
-// import java.util.Arrays;
+import java.util.*;
 
 // in this question we given a triangle in the ith row i+1 elements are their
 // like for 0th we have 1 element, for 1th we have 2 elements
@@ -91,5 +91,31 @@ public class Q11_Triangle {
         }
 
         System.out.println(prev[0]);
+    }
+
+    public int minimumTotal(List<List<Integer>> tri) {
+        int n = tri.size();
+        List<Integer> prev = new ArrayList<>();
+
+        for(int j = 0; j < n; j++) prev.add(tri.get(n-1).get(j));
+
+        for(int i = n-1; i >= 0; i--){
+
+            List<Integer> curr = new ArrayList<>();
+
+            for(int j = 0; j <= i; j++){
+
+                int down = tri.get(i).get(j) + prev.get(j);
+                int diag = tri.get(i).get(j) + prev.get(j+1);
+                curr.set(j, Math.min(down, diag));
+
+            }
+
+            prev = curr;
+
+        }
+
+        return prev.get(0);
+        
     }
 }
