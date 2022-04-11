@@ -80,33 +80,63 @@ public class Q12_Max_min_falling_path_sum {
         // System.out.println(maxi);
 
         // tabulation
-        int[][] dp = new int[m][n];
+        // int[][] dp = new int[m][n];
 
-        for (int j = 0; j < n; j++)
-            dp[0][j] = matrix[0][j];
+        // for (int j = 0; j < n; j++)
+        //     dp[0][j] = matrix[0][j];
 
-        for (int i = 1; i < m; i++) {
+        // for (int i = 1; i < m; i++) {
 
-            for (int j = 0; j < n; j++) {
+        //     for (int j = 0; j < n; j++) {
 
-                int straight = matrix[i][j] + dp[i-1][j];
+        //         int straight = matrix[i][j] + dp[i-1][j];
+
+        //         int leftdiag = matrix[i][j];
+        //         if(j - 1 >= 0) leftdiag += dp[i-1][j-1];
+        //         else leftdiag += -(int)Math.pow(10, 9);
+
+        //         int rightdiag = matrix[i][j];
+        //         if(j + 1 < n) rightdiag += dp[i-1][j+1];
+        //         else rightdiag += -(int)Math.pow(10, 9);
+
+        //         dp[i][j] = Math.max(straight, Math.max(leftdiag, rightdiag));
+
+        //     }
+
+        // }
+
+        // int maxi = -(int) Math.pow(10, 9);
+        // for(int j = 0; j < n; j++) maxi = Math.max(maxi, dp[m-1][j]);
+        // System.out.println(maxi); 
+
+        // space optimization
+        int[] prev = new int[n];
+        for(int j = 0; j < n; j++) prev[j] = matrix[0][j];
+
+        for(int i = 1; i < m; i++){
+
+            int[] curr = new int[n];
+
+            for(int j = 0; j < n; j++){
+
+                int straight = matrix[i][j] + prev[j];
 
                 int leftdiag = matrix[i][j];
-                if(j - 1 >= 0) leftdiag += dp[i-1][j-1];
+                if(j-1 >= 0) leftdiag += prev[j-1];
                 else leftdiag += -(int)Math.pow(10, 9);
 
                 int rightdiag = matrix[i][j];
-                if(j + 1 < n) rightdiag += dp[i-1][j+1];
+                if(j+1 < n) rightdiag += prev[j+1];
                 else rightdiag += -(int)Math.pow(10, 9);
 
-                dp[i][j] = Math.max(straight, Math.max(leftdiag, rightdiag));
-
+                curr[j] = Math.max(straight, Math.max(leftdiag, rightdiag));
             }
-
+            prev = curr;
         }
 
-        int maxi = -(int) Math.pow(10, 9);
-        for(int j = 0; j < n; j++) maxi = Math.max(maxi, dp[m-1][j]);
-        System.out.println(maxi); 
+        int maxi = -(int)Math.pow(10, 9);
+        for(int j = 0; j < n; j++) maxi = Math.max(maxi, prev[j]);
+
+        System.out.println(maxi);
     }
 }
