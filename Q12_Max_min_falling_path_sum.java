@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 // we have given a matrix, we have to find the maximum path sum to reach destination
 // destination is last row any col
 // starting from 1st row any col
@@ -29,11 +27,14 @@ public class Q12_Max_min_falling_path_sum {
     public static int helper(int i, int j, int[][] matrix, int[][] dp) {
         // for straight i will be corrent
         // but for left and right diag their is possibility that col can go out of bound
-        if(j < 0 || j >= matrix[0].length) return -(int)Math.pow(10, 9);
-        if(i == 0) return matrix[0][j];
+        if (j < 0 || j >= matrix[0].length)
+            return -(int) Math.pow(10, 9);
+        if (i == 0)
+            return matrix[0][j];
 
-        if(dp[i][j] != -1) return dp[i][j];
-        
+        if (dp[i][j] != -1)
+            return dp[i][j];
+
         // these are the three calls
         // to go straight col will be same, row will decrease
         // to go in left diag col and row both will decrease
@@ -65,15 +66,47 @@ public class Q12_Max_min_falling_path_sum {
         // System.out.println(maxi);
 
         // memoization
-        int[][] dp = new int[m][n];
-        for (int i = 0; i < m; i++)
-            Arrays.fill(dp[i], -1);
+        // int[][] dp = new int[m][n];
 
-        int maxi = -(int) Math.pow(10, 9);
-        for (int j = 0; j < n; j++) {
-            maxi = Math.max(maxi, helper(m - 1, j, matrix, dp));
+        // for (int i = 0; i < m; i++)
+        // Arrays.fill(dp[i], -1);
+
+        // int maxi = -(int) Math.pow(10, 9);
+
+        // for (int j = 0; j < n; j++) {
+        // maxi = Math.max(maxi, helper(m - 1, j, matrix, dp));
+        // }
+
+        // System.out.println(maxi);
+
+        // tabulation
+        int[][] dp = new int[m][n];
+
+        for (int j = 0; j < n; j++)
+            dp[0][j] = matrix[0][j];
+
+        for (int i = 1; i < m; i++) {
+
+            for (int j = 0; j < n; j++) {
+
+                int straight = matrix[i][j] + dp[i-1][j];
+
+                int leftdiag = matrix[i][j];
+                if(j - 1 >= 0) leftdiag += dp[i-1][j-1];
+                else leftdiag += -(int)Math.pow(10, 9);
+
+                int rightdiag = matrix[i][j];
+                if(j + 1 < n) rightdiag += dp[i-1][j+1];
+                else rightdiag += -(int)Math.pow(10, 9);
+
+                dp[i][j] = Math.max(straight, Math.max(leftdiag, rightdiag));
+
+            }
+
         }
 
-        System.out.println(maxi);
+        int maxi = -(int) Math.pow(10, 9);
+        for(int j = 0; j < n; j++) maxi = Math.max(maxi, dp[m-1][j]);
+        System.out.println(maxi); 
     }
 }
