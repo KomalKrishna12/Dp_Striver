@@ -27,6 +27,8 @@ public class Q14_Subset_sum_equal_to_target {
         // either we can take this arr[idx] element or not
         // if taking then only idx will decrease, target will be same
         boolean nottake = f(idx - 1, target, arr);
+        if (nottake)
+            return true;
 
         // now if we want to take that arr[idx] element then we have to check first
         // if arr[idx] is less than or equal to target then only we can take this
@@ -41,8 +43,8 @@ public class Q14_Subset_sum_equal_to_target {
     }
 
     public static void main(String[] args) {
-        int arr[] = { 1, 2, 3, 4 };
-        int k = 4; // target
+        int arr[] = { 3, 34, 4, 12, 5, 2 };
+        int k = 30; // target
         int n = arr.length;
 
         // recusion
@@ -75,31 +77,36 @@ public class Q14_Subset_sum_equal_to_target {
         // we can acheive target of arr[0] only
         // boolean[][] dp = new boolean[n][k + 1];
 
-        // // first base case
+        // // // first base case
         // for (int i = 0; i < n; i++)
-        //     dp[i][0] = true;
+        // dp[i][0] = true;
 
-        // // second base case
-        // dp[0][arr[0]] = true;
+        // // // second base case
+        // if(arr[0] <= k) dp[0][arr[0]] = true;
 
-        // // now start row from 1 to n and col from 1 to k
-        // // copy the body of recusion inside loop and replace f with dp and in place of
-        // // return
-        // // store it in dp
-        // // at end print dp[n-1][k] bcoz is recursion we start from f(n-1, k)
+        // // // now start row from 1 to n and col from 1 to k
+        // // // copy the body of recusion inside loop and replace f with dp and in
+        // place
+        // // of
+        // // // return
+        // // // store it in dp
+        // // // at end print dp[n-1][k] bcoz is recursion we start from f(n-1, k)
         // for (int idx = 1; idx < n; idx++) {
-        //     for (int target = 1; target <= k; target++) {
-        //         boolean nottake = dp[idx - 1][target];
-        //         boolean take = false;
-        //         if (arr[idx] <= target)
-        //             take = dp[idx - 1][target - arr[idx]];
+        // for (int target = 1; target <= k; target++) {
+        // boolean nottake = dp[idx - 1][target];
+        // if (nottake) {
+        // dp[idx][target] = true;
+        // continue;
+        // }
+        // boolean take = false;
+        // if (arr[idx] <= target)
+        // take = dp[idx - 1][target - arr[idx]];
 
-        //         dp[idx][target] = take || nottake;
-        //     }
+        // dp[idx][target] = take || nottake;
+        // }
         // }
 
-        // System.out.println(dp[n-1][k]);
-
+        // System.out.println(dp[n - 1][k]);
 
         // space optimization
         // as we can see in tabulation we are using 2D dp
@@ -109,25 +116,32 @@ public class Q14_Subset_sum_equal_to_target {
         // but make sure 0th col is always true so mark it true
         // copy code of tabulation
         // replace dp[idx-1] with prev and dp[idx] with curr
-        boolean[] prev = new boolean[k+1];
-        boolean[] curr = new boolean[k+1];
-        prev[0] = curr[0] = true;
+        boolean[] prev = new boolean[k + 1];
+
+        prev[0] = true;
+
+        // arr[0] has to be less then or equal to k then only we can mark it true
+        // suppose arr[0] is greater than target then it'll not give accurate result
+        if (arr[0] <= k) 
+            prev[arr[0]] = true;
 
         for (int idx = 1; idx < n; idx++) {
-                for (int target = 1; target <= k; target++) {
-                    boolean nottake = prev[target];
-                    boolean take = false;
-                    if (arr[idx] <= target)
-                        take = prev[target - arr[idx]];
-    
-                    curr[target] = take || nottake;
-                }
-                prev = curr;
+            boolean[] curr = new boolean[k + 1];
+            curr[0] = true;
+            for (int target = 1; target <= k; target++) {
+                boolean nottake = prev[target];
+                boolean take = false;
+                if (arr[idx] <= target)
+                    take = prev[target - arr[idx]];
+
+                curr[target] = take || nottake;
             }
-    
-            System.out.println(prev[k]);
-        
+            prev = curr;
         }
+
+        System.out.println(prev[k]);
+
+    }
 
     public static boolean ff(int idx, int target, int[] arr, int[][] dp) {
 
