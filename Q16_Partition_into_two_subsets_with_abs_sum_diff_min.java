@@ -19,39 +19,97 @@ public class Q16_Partition_into_two_subsets_with_abs_sum_diff_min {
             totsum += val;
 
         int k = totsum;
-        boolean[][] dp = new boolean[n][totsum + 1];
-        // fill all 0th col as true bcoz we can achieve target 0 without takin any
-        // elemens
+        // boolean[][] dp = new boolean[n][totsum + 1];
+        // // fill all 0th col as true bcoz we can achieve target 0 without takin any
+        // // elemens
+        // for (int i = 0; i < n; i++)
+        //     dp[i][0] = true;
+
+        // if (arr[0] <= k)
+        //     dp[0][arr[0]] = true;
+
+        // for (int idx = 1; idx < n; idx++) {
+
+        //     for (int tar = 1; tar <= k; tar++) {
+
+        //         boolean nottake = dp[idx - 1][tar];
+
+        //         boolean take = false;
+        //         if (arr[idx] <= tar)
+        //             take = dp[idx - 1][tar - arr[idx]];
+
+        //         dp[idx][tar] = take || nottake;
+
+        //     }
+
+        // }
+
+        // // after this loop dp is filles with true or false which denotes that we can achieve target or not
+        // // now create a mini variable initialize it with bigg value
+        // // now start traversing in the last row (n-1) check for all col (0 to target) if it is true
+        // // then s1 = col, s2 = totsum - s1 now find the absolute diff between s1 and s2 and store 
+        // // the min diff into mini
+
+        // int mini = (int) Math.pow(10, 9);
+        // for (int s1 = 0; s1 <= k; s1++) {
+        //     if (dp[n - 1][s1] == true) {
+        //         int diff = Math.abs((totsum - s1) - s1);
+        //         mini = Math.min(mini, diff);
+        //     }
+        // }
+
+        // System.out.println(mini);
+
+
+        // space optimization
+        // now we can optimized the space by using 1D array so create 1D array replace dp[idx-1] with prev
+        // and dp[idx] with curr
+        // and to find mini simply use prev that is our last row array
+        boolean[] prev = new boolean[totsum + 1];
+        
         for (int i = 0; i < n; i++)
-            dp[i][0] = true;
+            prev[0] = true;
 
         if (arr[0] <= k)
-            dp[0][arr[0]] = true;
+            prev[arr[0]] = true;
 
         for (int idx = 1; idx < n; idx++) {
 
+            boolean[] curr = new boolean[totsum + 1];
+            curr[0] = true;
+
             for (int tar = 1; tar <= k; tar++) {
 
-                boolean nottake = dp[idx - 1][tar];
+                boolean nottake = prev[tar];
 
                 boolean take = false;
                 if (arr[idx] <= tar)
-                    take = dp[idx - 1][tar - arr[idx]];
+                    take = prev[tar - arr[idx]];
 
-                dp[idx][tar] = take || nottake;
+                curr[tar] = take || nottake;
 
             }
 
+            prev = curr;
+
         }
+
+        // after this loop dp is filles with true or false which denotes that we can achieve target or not
+        // now create a mini variable initialize it with bigg value
+        // now start traversing in the last row (n-1) check for all col (0 to target) if it is true
+        // then s1 = col, s2 = totsum - s1 now find the absolute diff between s1 and s2 and store 
+        // the min diff into mini
 
         int mini = (int) Math.pow(10, 9);
         for (int s1 = 0; s1 <= k; s1++) {
-            if (dp[n - 1][s1] == true) {
+            if (prev[s1] == true) {
                 int diff = Math.abs((totsum - s1) - s1);
                 mini = Math.min(mini, diff);
             }
         }
 
         System.out.println(mini);
+
+
     }
 }
