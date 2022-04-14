@@ -2,7 +2,7 @@
 // here we have to return count so use 1 and 0 instead of true and false
 // and pick & nonpick will be same but add both of them so it'll denotes count
 
-public class Q17_Count_subbsets_with_sum_k {
+public class Q17_Count_subsets_with_sum_k {
 
     public static int f(int idx, int tar, int[] arr) {
         if (tar == 0)
