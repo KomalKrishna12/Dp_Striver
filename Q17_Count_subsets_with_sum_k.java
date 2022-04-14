@@ -20,8 +20,8 @@ public class Q17_Count_subsets_with_sum_k {
     }
 
     public static void main(String[] args) {
-        int arr[] = { 1, 2, 2, 3 };
-        int k = 3; // target
+        int arr[] = { 9, 7, 0, 3, 9, 8, 6, 5, 7, 6 };
+        int k = 31; // target
 
         int n = arr.length;
 
@@ -35,69 +35,85 @@ public class Q17_Count_subsets_with_sum_k {
         // while Integer by default value is null so we can avoid this O(n) space and
         // check for null
         // value
-        // Integer[][] dp = new Integer[n][k + 1];
-        // System.out.println(f2(n-1, k, arr, dp));
+        Integer[][] dp = new Integer[n][k + 1];
+        System.out.println(f2(n-1, k, arr, dp));
 
         // tabulation
         // int[][] dp = new int[n][k + 1];
-        // for(int i = 0; i < n; i++) dp[i][0] = 1;
-        // if(arr[0] <= k) dp[0][arr[0]] = 1;
+        // for (int i = 0; i < n; i++) {
+        //     dp[i][0] = 1;
+        // }
+        // if (arr[0] <= k)
+        //     dp[0][arr[0]] = 1;
 
-        // for(int idx = 1; idx < n; idx++){
+        // if(arr[0] == 0) dp[0][0] = 2;    
 
-        // for(int tar = 1; tar <= k; tar++){
+        // for (int idx = 1; idx < n; idx++) {
 
-        // int nottake = dp[idx - 1][tar];
-        // int take = 0;
-        // if(arr[idx] <= tar) take = dp[idx - 1][tar - arr[idx]];
-        // dp[idx][tar] = take + nottake;
+        //     for (int tar = 1; tar <= k; tar++) {
+        //         int nottake = dp[idx - 1][tar];
+        //         int take = 0;
+        //         if (arr[idx] <= tar)
+        //             take = dp[idx - 1][tar - arr[idx]];
+        //         dp[idx][tar] = take + nottake;
+
+        //     }
 
         // }
 
-        // }
-
-        // System.out.println(dp[n-1][k]);
+        // System.out.println(dp[n - 1][k]);
 
         // space optimization
         // in tabulation code we can see in take and nottake idx-1 is used so we can
         // easily optimized
         // the space using 1D array
 
-        int[] prev = new int[k + 1];
-        prev[0] = 1;
-        if (arr[0] <= k)
-            prev[arr[0]] = 1;
+        // int[] prev = new int[k + 1];
+        // prev[0] = 1;
+        // if (arr[0] <= k)
+        // prev[arr[0]] = 1;
 
-        for (int idx = 1; idx < n; idx++) {
-            int[] curr = new int[k + 1];
-            curr[0] = 1;
-            for (int tar = 1; tar <= k; tar++) {
+        // for (int idx = 1; idx < n; idx++) {
+        // int[] curr = new int[k + 1];
+        // curr[0] = 1;
+        // for (int tar = 1; tar <= k; tar++) {
 
-                int nottake = prev[tar];
-                int take = 0;
-                if (arr[idx] <= tar)
-                    take = prev[tar - arr[idx]];
-                curr[tar] = take + nottake;
+        // int nottake = prev[tar];
+        // int take = 0;
+        // if (arr[idx] <= tar)
+        // take = prev[tar - arr[idx]];
+        // curr[tar] = take + nottake;
 
-            }
+        // }
 
-            prev = curr;
+        // prev = curr;
 
-        }
+        // }
 
-        System.out.println(prev[k]);
+        // System.out.println(prev[k]);
     }
 
     public static int f2(int idx, int tar, int[] arr, Integer[][] dp) {
-        if (tar == 0)
-            return 1;
-        if (idx == 0)
-            return arr[idx] == tar ? 1 : 0;
+
+        // we remove tar == 0 base case bcoz if we have arr : (0, 0, 1)
+        // and we are at ind 2 and tar is 1 so when we take arrr[idx] element hen tar become 0
+        // and bcoz of tar == 0 base case it'll retutn 1 but their is prev 0, 0 so we have
+        // to move till idx == 0 then only we can apply pur base cases
+        // if idx == 0 and tar and arr[idx] both are 0 that means we have 2 ways
+        // one is already got tar 0 and other will be when we add 0 into sum
+        // so other base cases are if tar is 0 or arr[idx] == tar so return 1
+        if (idx == 0) {
+            if (tar == 0 && arr[idx] == 0)
+                return 2;
+            if (tar == 0 || arr[idx] == tar)
+                return 1;
+            return 0;
+        }
 
         if (dp[idx][tar] != null)
             return dp[idx][tar];
 
-        int nottake = f(idx - 1, tar, arr);
+        int nottake = f2(idx - 1, tar, arr, dp);
 
         int take = 0;
         if (arr[idx] <= tar)
