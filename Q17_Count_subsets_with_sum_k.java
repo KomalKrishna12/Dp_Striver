@@ -20,8 +20,8 @@ public class Q17_Count_subsets_with_sum_k {
     }
 
     public static void main(String[] args) {
-        int arr[] = { 0, 0, 1 };
-        int k = 1; // target
+        int arr[] = { 0, 1, 1, 2, 3 };
+        int k = 2; // target
 
         int n = arr.length;
 
