@@ -11,7 +11,7 @@
 // totalsum - D has to be positive bcoz all no are positive and even also then only we got ans otherwise
 // it'll be in decimal 
 
-public class Q18_Count_partitions_with_givven_difference {
+public class Q18_Count_partitions_with_given_difference {
 
     public static int countSubsetsWithSumK(int k, int[] arr){
 
