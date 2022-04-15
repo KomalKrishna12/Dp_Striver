@@ -20,8 +20,8 @@ public class Q17_Count_subsets_with_sum_k {
     }
 
     public static void main(String[] args) {
-        int arr[] = { 9, 7, 0, 3, 9, 8, 6, 5, 7, 6 };
-        int k = 31; // target
+        int arr[] = { 0, 0, 1 };
+        int k = 1; // target
 
         int n = arr.length;
 
@@ -35,33 +35,32 @@ public class Q17_Count_subsets_with_sum_k {
         // while Integer by default value is null so we can avoid this O(n) space and
         // check for null
         // value
-        Integer[][] dp = new Integer[n][k + 1];
-        System.out.println(f2(n-1, k, arr, dp));
+        // Integer[][] dp = new Integer[n][k + 1];
+        // System.out.println(f2(n-1, k, arr, dp));
 
         // tabulation
-        // int[][] dp = new int[n][k + 1];
-        // for (int i = 0; i < n; i++) {
-        //     dp[i][0] = 1;
-        // }
-        // if (arr[0] <= k)
-        //     dp[0][arr[0]] = 1;
+        int[][] dp = new int[n][k + 1];
+        if(arr[0] == 0) dp[0][0] = 2; 
+        else dp[0][0] = 1;
+        if (arr[0] != 0 && arr[0] <= k) // if arr[0] is 0 then we cannot put 1 so check 
+            dp[0][arr[0]] = 1;
 
-        // if(arr[0] == 0) dp[0][0] = 2;    
+           
 
-        // for (int idx = 1; idx < n; idx++) {
+        for (int idx = 1; idx < n; idx++) {
 
-        //     for (int tar = 1; tar <= k; tar++) {
-        //         int nottake = dp[idx - 1][tar];
-        //         int take = 0;
-        //         if (arr[idx] <= tar)
-        //             take = dp[idx - 1][tar - arr[idx]];
-        //         dp[idx][tar] = take + nottake;
+            for (int tar = 0; tar <= k; tar++) {
+                int nottake = dp[idx - 1][tar];
+                int take = 0;
+                if (arr[idx] <= tar)
+                    take = dp[idx - 1][tar - arr[idx]];
+                dp[idx][tar] = take + nottake;
 
-        //     }
+            }
 
-        // }
+        }
 
-        // System.out.println(dp[n - 1][k]);
+        System.out.println(dp[n - 1][k]);
 
         // space optimization
         // in tabulation code we can see in take and nottake idx-1 is used so we can
