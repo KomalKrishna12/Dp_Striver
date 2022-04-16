@@ -43,7 +43,7 @@ public class Q17_Count_subsets_with_sum_k {
         if(arr[0] == 0) dp[0][0] = 2; 
         else dp[0][0] = 1;
         if (arr[0] != 0 && arr[0] <= k) // if arr[0] is 0 then we cannot put 1 so check 
-            dp[0][arr[0]] = 1;
+            dp[0][arr[0]] = 1;   
 
            
 
