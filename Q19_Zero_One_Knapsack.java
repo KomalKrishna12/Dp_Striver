@@ -7,7 +7,7 @@
 // if take then firstly check that the weight[idx] <= cap then only we can take the weight
 // when we take then cap will be cap - weight[idx] and add value of idx 
 // now return max 
-public class Q19_Zero_One_Knacksack {
+public class Q19_Zero_One_Knapsack {
     public static int f(int idx, int capacity, int[] wt, int[] val) {
 
         if (idx == 0) {
