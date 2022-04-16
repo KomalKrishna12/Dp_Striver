@@ -21,19 +21,22 @@
 
 public class Q20_Minimum_coins {
 
-    public static int f(int idx, int T, int[] arr){
+    public static int f(int idx, int T, int[] arr) {
 
-        if(idx == 0){
+        if (idx == 0) {
 
-            if(T % arr[idx] == 0) return T / arr[idx];
-            else return (int)1e9;
+            if (T % arr[idx] == 0)
+                return T / arr[idx];
+            else
+                return (int) 1e9;
 
         }
 
         int nottake = 0 + f(idx - 1, T, arr);
 
-        int take = (int)1e9;
-        if(arr[idx] <= T) take = 1 + f(idx, T - arr[idx], arr);
+        int take = (int) 1e9;
+        if (arr[idx] <= T)
+            take = 1 + f(idx, T - arr[idx], arr);
 
         return Math.min(take, nottake);
 
@@ -45,9 +48,117 @@ public class Q20_Minimum_coins {
         int T = 7; // target
         int n = arr.length;
 
-        int ans = f(n-1, T, arr);
-        if(ans >= (int)1e9) System.out.println(-1);
-        else System.out.println(ans);
+        // recursion
+        // int ans = f(n-1, T, arr);
+        // if(ans >= (int)1e9) System.out.println(-1);
+        // else System.out.println(ans);
+
+        // memoization
+        // Integer[][] dp = new Integer[n][T+1];
+        // int ans = f2(n-1, T, arr, dp);
+        // if(ans >= (int)1e9) System.out.println(-1);
+        // else System.out.println(ans);
+
+        // tabulation
+        // int[][] dp = new int[n][T + 1];
+
+        // for (int tar = 0; tar <= T; tar++) {
+
+        //     if (tar % arr[0] == 0)
+        //         dp[0][tar] = tar / arr[0];
+
+        //     else
+        //         dp[0][tar] = (int) 1e9;
+
+        // }
+
+        // for (int idx = 1; idx < n; idx++) {
+
+        //     for (int tar = 0; tar <= T; tar++) {
+
+        //         int nottake = 0 + dp[idx - 1][tar];
+
+        //         int take = (int) 1e9;
+
+        //         if (arr[idx] <= tar)
+        //             take = 1 + dp[idx][tar - arr[idx]];
+
+        //         dp[idx][tar] = Math.min(take, nottake);
+
+        //     }
+
+        // }
+
+        // int ans = dp[n - 1][T];
+        // if (ans >= (int) 1e9)
+        //     System.out.println(-1);
+        // else
+        //     System.out.println(ans);
+
+        // space optimization
+        int[] prev = new int[T + 1];
+
+        for (int tar = 0; tar <= T; tar++) {
+
+            if (tar % arr[0] == 0)
+                prev[tar] = tar / arr[0];
+
+            else
+                prev[tar] = (int) 1e9;
+
+        }
+
+        for (int idx = 1; idx < n; idx++) {
+
+            int[] curr = new int[T + 1];
+
+            for (int tar = 0; tar <= T; tar++) {
+
+                int nottake = 0 + prev[tar];
+
+                int take = (int) 1e9;
+
+                if (arr[idx] <= tar)
+                    take = 1 + curr[tar - arr[idx]];
+
+                    curr[tar] = Math.min(take, nottake);
+
+            }
+
+            prev = curr;
+
+        }
+
+        int ans = prev[T];
+        if (ans >= (int) 1e9)
+            System.out.println(-1);
+        else
+            System.out.println(ans);
 
     }
+
+    public static int f2(int idx, int T, int[] arr, Integer[][] dp) {
+
+        if (idx == 0) {
+
+            if (T % arr[idx] == 0)
+                return T / arr[idx];
+            else
+                return (int) 1e9;
+
+        }
+
+        if (dp[idx][T] != null)
+            return dp[idx][T];
+
+        int nottake = 0 + f2(idx - 1, T, arr, dp);
+
+        int take = (int) 1e9;
+        if (arr[idx] <= T)
+            take = 1 + f2(idx, T - arr[idx], arr, dp);
+
+        return dp[idx][T] = Math.min(take, nottake);
+
+    }
+
 }
