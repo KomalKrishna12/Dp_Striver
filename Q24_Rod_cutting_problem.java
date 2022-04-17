@@ -39,10 +39,10 @@ public class Q24_Rod_cutting_problem {
 
         if(dp[idx][N] != null) return dp[idx][N];
 
-        int nottake = 0 + f(idx - 1, N, price);
+        int nottake = 0 + f2(idx - 1, N, price, dp);
         int take = Integer.MIN_VALUE;
         int rodlength = idx+1;
-        if(rodlength <= N) take = price[idx] + f(idx, N - rodlength, price);
+        if(rodlength <= N) take = price[idx] + f2(idx, N - rodlength, price, dp);
 
         return dp[idx][N] = Math.max(take, nottake);
 
