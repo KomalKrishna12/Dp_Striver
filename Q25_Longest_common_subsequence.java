@@ -48,7 +48,7 @@ public class Q25_Longest_common_subsequence {
         for (int idx2 = 0; idx2 <= m; idx2++)
             dp[0][idx2] = 0;
 
-        for (int idx1 = 0; idx1 <= m; idx1++)
+        for (int idx1 = 0; idx1 <= n; idx1++)
             dp[idx1][0] = 0;
 
         for (int idx1 = 1; idx1 <= n; idx1++) {
