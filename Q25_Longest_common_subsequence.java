@@ -69,6 +69,8 @@ public class Q25_Longest_common_subsequence {
     
         System.out.println(dp[n][m]);
 
+        // space optimization can also be done using prev[] and curr[]
+
     }
 
     public static int f3(int idx1, int idx2, String s1, String s2, Integer[][] dp) {
