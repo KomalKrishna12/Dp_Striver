@@ -2,7 +2,7 @@ public class Q30_Minimum_insertion_deletion_to_convert_string_one_to_string_two 
     
     public static int lowestCommonSubsequence(int n, int m, String s1, String s2){
 
-        int[][] dp = new int[n+1][n+1];
+        int[][] dp = new int[n+1][m+1];
 
         for(int idx1 = 1; idx1 <= n; idx1++){
 
@@ -22,8 +22,8 @@ public class Q30_Minimum_insertion_deletion_to_convert_string_one_to_string_two 
 
     public static void main(String[] args) {
         
-        String s1 = "abcd";
-        String s2 = "anc";
+        String s1 = "a";
+        String s2 = "ab";
 
         int n = s1.length();
         int m = s2.length();
