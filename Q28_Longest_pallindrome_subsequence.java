@@ -3,7 +3,7 @@
 // to solve this we were using same approach of longest common subsequence in which we have two strings
 // so we create another string and set it as reverse of string s1 which is given and pass both in
 // longest common subsequence problem it'll return length of longest substring
-public class Q28_Longes_pallindrome_subsequence {
+public class Q28_Longest_pallindrome_subsequence {
 
     public static int lowestCommonSubsequence(int n, String s, String t){
 
