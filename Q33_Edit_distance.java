@@ -32,6 +32,45 @@ public class Q33_Edit_distance{
 
     }
 
+    public static int f2(int i, int j, String s1, String s2, Integer[][] dp){
+
+        if(i < 0) return j + 1;
+
+        if(j < 0) return i + 1;
+
+        if(dp[i][j] != null) return dp[i][j];
+
+        if(s1.charAt(i) == s2.charAt(j)) {
+
+            return dp[i][j] =  f2(i-1, j-1, s1, s2, dp);
+
+        }
+
+        return dp[i][j] =  1 + Math.min(f2(i, j-1, s1, s2, dp), 
+                               Math.min(f2(i-1, j, s1, s2, dp), f2(i-1, j-1, s1, s2, dp)));
+
+    }
+
+    public static int f3(int i, int j, String s1, String s2, Integer[][] dp){
+
+        if(i == 0) return j;
+
+        if(j == 0) return i;
+
+        if(dp[i][j] != null) return dp[i][j];
+
+        if(s1.charAt(i-1) == s2.charAt(j-1)) {
+
+            return dp[i][j] =  f3(i-1, j-1, s1, s2, dp);
+
+        }
+
+        return dp[i][j] =  1 + Math.min(f3(i, j-1, s1, s2, dp), 
+                               Math.min(f3(i-1, j, s1, s2, dp), f3(i-1, j-1, s1, s2, dp)));
+
+    }
+
+
     public static void main(String[] args) {
         
         String s1 = "horse";
@@ -40,7 +79,40 @@ public class Q33_Edit_distance{
         int n = s1.length();
         int m = s2.length();
 
-        System.out.println(f(n-1, m-1, s1, s2));
+        // recursion
+        // System.out.println(f(n-1, m-1, s1, s2));
+
+        // memoization 0 based indexing
+        // Integer[][] dp = new Integer[n][m];
+        // System.out.println(f2(n-1, m-1, s1, s2, dp));
+
+        // memoization 1 based indexing
+        // Integer[][] dp = new Integer[n+1][m+1];
+        // System.out.println(f3(n, m, s1, s2, dp));
+
+        // tabulation
+        int[][] dp = new int[n+1][m+1];
+
+        for(int i = 0; i <= n; i++) dp[i][0] = i;
+        
+        for(int j = 1; j <= m; j++) dp[0][j] = j;
+
+        for(int i = 1; i <= n; i++){
+
+            for(int j = 1; j <= m; j++){
+
+                if(s1.charAt(i-1) == s2.charAt(j-1)) {
+
+                    dp[i][j] =  dp[i-1][j-1];
+        
+                }
+        
+                else dp[i][j] =  1 + Math.min(dp[i][j-1], Math.min(dp[i-1][j], dp[i-1][j-1]));
+
+            }
+        }
+
+        System.out.println(dp[n][m]);
  
     }
 
