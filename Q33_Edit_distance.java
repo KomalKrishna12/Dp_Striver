@@ -1,0 +1,47 @@
+// given two strings s1 and s2 we have to convert s1 to s2 using three operation : insert, remove or
+// replace. in Q29 we solve this but only two operations were allowed
+// so using recursion we can solve this
+// f(i, j) i points to s1 and j points to s2
+public class Q33_Edit_distance{
+
+    public static int f(int i, int j, String s1, String s2){
+
+        // first base case if i is negetive and j is rest with some string then in order to make string 
+        // j we need to add i chracters and here it is 0 based so i + 1
+        //second : if j is negetive means destination string is created so simply remove i + 1 string
+
+        if(i < 0) return j + 1;
+
+        if(j < 0) return i + 1;
+
+        // if charcater at i and j are same then no operation required so simply decrese both by 1  
+        if(s1.charAt(i) == s2.charAt(j)) {
+
+            return f(i-1, j-1, s1, s2);
+
+        }
+
+        // else we can perform three operations : insert, remove and replace
+        // insert : we're inserting any character so i will be same bcoz we add to match so that 
+        // is done now next will be current i
+        // remove : if we remove then i will decrease j will be same bcoz to match with j we remove i
+        // replace we are replacing i with j so i and j both will decrease
+        // return min of all three
+
+        return 1 + Math.min(f(i, j-1, s1, s2), Math.min(f(i-1, j, s1, s2), f(i-1, j-1, s1, s2)));
+
+    }
+
+    public static void main(String[] args) {
+        
+        String s1 = "horse";
+        String s2 = "ros";
+
+        int n = s1.length();
+        int m = s2.length();
+
+        System.out.println(f(n-1, m-1, s1, s2));
+ 
+    }
+
+}
