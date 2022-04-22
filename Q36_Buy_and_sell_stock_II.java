@@ -50,7 +50,7 @@ public class Q36_Buy_and_sell_stock_II {
         // System.out.println(f2(0, 1, arr, n, dp));
 
         // tabulation
-        int[][] dp = new int[n+1][2];
+        int[][] dp = new int[n+1][2];   
 
         dp[n][0] = dp[n][1] = 0;
 
