@@ -1,4 +1,4 @@
-// in this question we can buy 2 stock and sell the 2 stocks
+// in this question we can buy multiple stock and sell the mutiple stocks
 // if we buy one stock then we cannot buy second until first stock sell out
 // so we use a variable b if 1 that means no buy stock so we can buy the stock
 // if 0 that means we cannot buy we can only sell or leave it
