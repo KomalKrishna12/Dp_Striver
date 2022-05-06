@@ -12,7 +12,7 @@ public class Q39_Buy_And_Sell_Stock_with_cooldown {
             return Math.max(-arr[idx] + f(idx+1, 0, arr, n), f(idx+1, 1, arr, n));
         }
 
-        return Math.max(arr[idx] + f(idx+1, 1 , arr, n), f(idx+1, 0, arr, n));
+        return Math.max(arr[idx] + f(idx+2, 1 , arr, n), f(idx+1, 0, arr, n));
 
     }
     
@@ -22,7 +22,25 @@ public class Q39_Buy_And_Sell_Stock_with_cooldown {
 
         int n = arr.length;
 
-        System.out.println(f(0, 1, arr, n));
+        // recusion
+        // System.out.println(f(0, 1, arr, n));
+
+        // tabulation
+        int[][] dp = new int[n+2][2];
+
+        for(int idx = n-2; idx >= 0; idx--){
+
+            for(int buy = 0; buy <= 1; buy++){
+
+                dp[idx][1] = Math.max(-arr[idx] + dp[idx+1][0], dp[idx+1][1]);
+
+                dp[idx][0] = Math.max(arr[idx] + dp[idx+2][1], dp[idx+1][0]);
+
+            }
+
+        }
+
+        System.out.println(dp[0][1]);
 
     }
 
