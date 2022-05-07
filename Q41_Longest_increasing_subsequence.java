@@ -59,28 +59,54 @@ public class Q41_Longest_increasing_subsequence {
         // System.err.println(f2(0, -1, arr, n, dp));
 
         // tabulation
-        int[][] dp = new int[n + 1][n + 1];
+        // int[][] dp = new int[n + 1][n + 1];
+        // for (int idx = n - 1; idx >= 0; idx--) {
+
+        //     // prev are the idexes just before idx so start from idx-1 till -1 and for dp use second idx +1
+        //     // bcoz it can't be -1
+        //     for (int prev_idx = idx - 1; prev_idx >= -1; prev_idx--) {
+
+        //         int len = 0 + dp[idx + 1][prev_idx + 1];
+
+        //         if (prev_idx == -1 || arr[idx] > arr[prev_idx]) {
+
+        //             len = Math.max(len, 1 + dp[idx + 1][idx + 1]);
+
+        //         }
+
+        //         dp[idx][prev_idx + 1] = len;
+
+        //     }
+
+        // }
+
+        // System.out.println(dp[0][-1 + 1]);
+
+        int[] dp = new int[n + 1];
+        int[] curr = new int[n + 1];
         for (int idx = n - 1; idx >= 0; idx--) {
 
             // prev are the idexes just before idx so start from idx-1 till -1 and for dp use second idx +1
             // bcoz it can't be -1
             for (int prev_idx = idx - 1; prev_idx >= -1; prev_idx--) {
 
-                int len = 0 + dp[idx + 1][prev_idx + 1];
+                int len = 0 + dp[prev_idx + 1];
 
                 if (prev_idx == -1 || arr[idx] > arr[prev_idx]) {
 
-                    len = Math.max(len, 1 + dp[idx + 1][idx + 1]);
+                    len = Math.max(len, 1 + dp[idx + 1]);
 
                 }
 
-                dp[idx][prev_idx + 1] = len;
+                curr[prev_idx + 1] = len;
 
             }
 
+            dp = curr;
+
         }
 
-        System.out.println(dp[0][-1 + 1]);
+        System.out.println(dp[-1 + 1]);
 
     }
 
