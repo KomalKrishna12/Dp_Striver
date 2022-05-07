@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 // in this ques we have given an array and w have to find out the length of longest increasing subsequence
 // we use same take not take approch and we use a prev_idx to compare the curr idx
 // bcoz we need subsequence in increasing order
@@ -82,31 +84,63 @@ public class Q41_Longest_increasing_subsequence {
 
         // System.out.println(dp[0][-1 + 1]);
 
-        int[] dp = new int[n + 1];
-        int[] curr = new int[n + 1];
-        for (int idx = n - 1; idx >= 0; idx--) {
+        // int[] dp = new int[n + 1];
+        // int[] curr = new int[n + 1];
+        // for (int idx = n - 1; idx >= 0; idx--) {
 
             // prev are the idexes just before idx so start from idx-1 till -1 and for dp use second idx +1
             // bcoz it can't be -1
-            for (int prev_idx = idx - 1; prev_idx >= -1; prev_idx--) {
+        //     for (int prev_idx = idx - 1; prev_idx >= -1; prev_idx--) {
 
-                int len = 0 + dp[prev_idx + 1];
+        //         int len = 0 + dp[prev_idx + 1];
 
-                if (prev_idx == -1 || arr[idx] > arr[prev_idx]) {
+        //         if (prev_idx == -1 || arr[idx] > arr[prev_idx]) {
 
-                    len = Math.max(len, 1 + dp[idx + 1]);
+        //             len = Math.max(len, 1 + dp[idx + 1]);
+
+        //         }
+
+        //         curr[prev_idx + 1] = len;
+
+        //     }
+
+        //     dp = curr;
+
+        // }
+
+        // System.out.println(dp[-1 + 1]);
+
+        // easy approach
+        // create a one D dp and fill it with 1 bcoz if their is min 1 length subsequence is their
+        // which is itself the element
+        // now create a for loop outer for loop idx = 0 to n-1
+        // inner loop prev_idx = 0 to idx-1 
+        // now compare prev_idx value with idx if idx value is greater then add 1 for idx value
+        // and value of arr[prev_idx]
+        // create a max variable also which will compare each dp[idx] and return the length of 
+        // longest subsequence possible
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+
+        int max = 1;
+
+        for(int idx = 0; idx < n; idx++){
+
+            for(int prev = 0; prev < idx; prev++){
+
+                if(arr[idx] > arr[prev]){
+
+                    dp[idx] = Math.max(dp[idx], 1 + dp[prev]);
 
                 }
 
-                curr[prev_idx + 1] = len;
-
             }
 
-            dp = curr;
+            max = Math.max(max, dp[idx]);
 
         }
-
-        System.out.println(dp[-1 + 1]);
+ 
+        System.out.println(max);
 
     }
 
