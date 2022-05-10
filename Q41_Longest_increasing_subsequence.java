@@ -119,28 +119,84 @@ public class Q41_Longest_increasing_subsequence {
         // and value of arr[prev_idx]
         // create a max variable also which will compare each dp[idx] and return the length of 
         // longest subsequence possible
+        // int[] dp = new int[n];
+        // Arrays.fill(dp, 1);
+
+        // int max = 1;
+
+        // for(int idx = 0; idx < n; idx++){
+
+        //     for(int prev = 0; prev < idx; prev++){
+
+        //         if(arr[idx] > arr[prev]){
+
+        //             dp[idx] = Math.max(dp[idx], 1 + dp[prev]);
+
+        //         }
+
+        //     }
+
+        //     max = Math.max(max, dp[idx]);
+
+        // }
+ 
+        // System.out.println(max);
+
+        // print longest increasing subseq
+        // we can also print the longest increasing subseq
+        // create one more array hash and store idx in each cell
+        // whenever we update dp then update hash with prev idx
+        // also update lastidx as i while comparing max
+        // now create a arr of max size
+        // and set first idx value as arr[lastidx] and run a loop
+        // and print all idx and reverse the array
+
         int[] dp = new int[n];
+        int[] hash = new int[n];
         Arrays.fill(dp, 1);
 
         int max = 1;
+        int lastidx = 0;
 
         for(int idx = 0; idx < n; idx++){
 
+            hash[idx] = idx;
+
             for(int prev = 0; prev < idx; prev++){
 
-                if(arr[idx] > arr[prev]){
+                if(arr[idx] > arr[prev] && 1 + dp[prev] > dp[idx]){
 
-                    dp[idx] = Math.max(dp[idx], 1 + dp[prev]);
+                    dp[idx] = 1 + dp[prev];
+                    hash[idx] = prev;
 
                 }
 
             }
 
-            max = Math.max(max, dp[idx]);
+            if(dp[idx] > max){
+
+                max = dp[idx];
+                lastidx = idx;
+
+            }
 
         }
- 
-        System.out.println(max);
+
+        int[] list = new int[max];
+        list[0] = arr[lastidx];
+        int i = 1;
+
+        while(hash[lastidx] != lastidx){
+            lastidx = hash[lastidx];
+            list[i++] = arr[lastidx];
+        }
+
+        String s = "";
+        for(int ii = 0; ii < max; ii++){
+            s += arr[list[ii]];
+        }
+
+        System.out.println(max + " " + s);
 
     }
 
