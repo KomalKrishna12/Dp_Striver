@@ -1,4 +1,5 @@
 public class Q47_Matrix_Chain_Multiplication {
+    
     public static int f(int i, int j, int[] arr) {
 
         if (i == j)
