@@ -24,6 +24,12 @@ public class Q47_Matrix_Chain_Multiplication {
 
         // System.out.println(f(1, n-1, arr));
         // tabulation
+        // step 1 : write base case
+        // in base case if i == j then return 0 so run a for loop and store 0 for i==j
+        // step 2 : set i and j value so tabulation is bottom up so start from end
+        // make sure j is end idx so start from i+1 till n-1
+        // step 3 : copy all memoization code and replace f(i, j, arr) with dp[i][j]
+
         int[][] dp = new int[n][n];
 
         for (int i = 0; i < n; i++) {
