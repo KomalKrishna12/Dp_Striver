@@ -23,6 +23,6 @@ public class Q49_Burst_Balloons {
         for(int i = 0; i < n; i++) list.add(nums[i]);
         list.add(1);
 
-        System.out.println(f(1, n, list));
+        System.out.println(f(1, n, list)); 
     }
 }
