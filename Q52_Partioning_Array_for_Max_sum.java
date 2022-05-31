@@ -1,3 +1,8 @@
+// given an array we have to partion that array to get max sum
+// in a partion we can store max to max k numbers we can store less than k also but not more than k
+// in ech partion we have to find max number and reeplace all numbers with max ans then add them
+// so we have to find out thhe max so we use same approach front partioning like we did in pallindrome
+// partioning II
 public class Q52_Partioning_Array_for_Max_sum {
     public static int f(int i, int[] arr, int k){
         if(i == arr.length) return 0;
