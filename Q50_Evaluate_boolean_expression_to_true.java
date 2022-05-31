@@ -95,6 +95,6 @@ public class Q50_Evaluate_boolean_expression_to_true {
                 }
             }
         }
-        System.out.println(dp[0][j-1][1]);
+        System.out.println(dp[0][j-1][1]); 
     }
 }
