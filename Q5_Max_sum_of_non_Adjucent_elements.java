@@ -10,7 +10,8 @@ import java.util.Scanner;
 public class Q5_Max_sum_of_non_Adjucent_elements {
 
     public static int helper(int n, int[] dp, int[] arr){
-        if(n == 0) return arr[0];
+        if(n == 0) return arr[0]; // arr doesn't have any negetive element so the best option we have
+        // to pick this element
         if(n < 0) return 0; // for handling negetive indexes
 
         if(dp[n] != -1) return dp[n];
