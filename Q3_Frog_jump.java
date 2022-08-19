@@ -1,8 +1,8 @@
 import java.util.*;
-// in the qustion we have given n staricase and height array which contains energy at each staris
+// in the qustion we have given n staricase and height array which contains energy at each stairs
 // their is frog who can jump either 1 step or 2 step and lost some energy
 // if frog go to jth stair from ith stair then energy used by frog will be abs of height[j] - height[i]
-// so frog want to go to nth satir by using min energy
+// so frog want to go to nth stair by using min energy
 public class Q3_Frog_jump {
 
     public static int solve(int n, int[] dp, int[] heights){
