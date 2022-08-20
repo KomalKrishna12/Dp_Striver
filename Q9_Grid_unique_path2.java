@@ -1,7 +1,6 @@
 import java.util.Scanner;
-
-// this is the similar question like Q8 one point added that in the matrix 0 and -1 filled
-// if in the followed way value is -1 that means that way is blocked we cannot move
+// this is the similar question like Q8 one point added that matrix is filled with 0 and -1
+// if value is -1 that means that way is blocked we cannot move
 // so simply add one condiion that if arr[i][j] == -1 return 0 that means no way or path
 public class Q9_Grid_unique_path2 {
     public static void main(String[] args) {
