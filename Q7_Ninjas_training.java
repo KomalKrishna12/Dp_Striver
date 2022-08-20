@@ -3,7 +3,7 @@ import java.util.Scanner;
 // some ninjas are in training of n days where they have to trains in 3 practices
 // if at day1 he practice first skill then on next day he cannot practice same skill
 // so non adjacent type
-// so we have given a points array which is 2d row represents days o training and column
+// so we have given a points array which is 2d row represents days of training and column
 // are 3 bcoz we have three skills training with their marks
 // we have to find in n days a ninja can take training so he can earn max points
 public class Q7_Ninjas_training {
@@ -43,7 +43,7 @@ public class Q7_Ninjas_training {
             }
         }
         scn.close();
-        // so we start at n-1 days and first time w have 3 options available but we are using 0 based 
+        // so we start at n-1 days and first time we have 3 options available but we are using 0 based 
         // indexing so index will be 0 to 2 but we give 3 that means we have all options from 0 to 2 
         // are available
         // System.out.println(helper(n-1, 3, points));
