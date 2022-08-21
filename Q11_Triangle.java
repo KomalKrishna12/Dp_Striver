@@ -1,6 +1,5 @@
 import java.util.*;
-
-// in this question we given a triangle in the ith row i+1 elements are their
+// in this question we given a triangle, in the ith row i+1 elements are their
 // like for 0th we have 1 element, for 1th we have 2 elements
 // we can traverse to down or diagonal means at (i+1, j) or (i+1,j+1)
 // we have to reach last row, we can reach any col of last row
@@ -42,7 +41,8 @@ public class Q11_Triangle {
 
     public static void main(String[] args) {
 
-        int triangle[][] = { { 1 },
+        int triangle[][] = { 
+                { 1 },
                 { 2, 3 },
                 { 3, 6, 7 },
                 { 8, 9, 6, 10 } };

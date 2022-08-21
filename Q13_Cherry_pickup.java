@@ -8,7 +8,7 @@
 // so we have to start from fixed
 // we cannot do like find max for first then for second and add, if we do like that then the case
 // where both reach same col will avoid
-// and they can travel in 3 diection, if they are at (i,j) then can move (i+1,j-1), (i+1,j) and (i+1,j+1)
+// they can travel in 3 direction, if they are at (i,j) then can move (i+1,j-1), (i+1,j) and (i+1,j+1)
 // so we move both together so take i1, j1 and i2, j2
 // here i1 and i2 will be same bcoz both can move one row down so indexes are i, j1, j2
 public class Q13_Cherry_pickup {
@@ -52,9 +52,11 @@ public class Q13_Cherry_pickup {
     }
 
     public static void main(String[] args) {
-        int matrix[][] = { { 2, 3, 1, 2 },
+        int matrix[][] = { 
+                { 2, 3, 1, 2 },
                 { 3, 4, 2, 2 },
-                { 5, 6, 3, 5 } };
+                { 5, 6, 3, 5 } 
+            };
         int n = matrix.length;
         int m = matrix[0].length;
 

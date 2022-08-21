@@ -1,6 +1,5 @@
 // import java.util.Arrays;
-
-// given n size of array, and all elements of array is given
+// given n, size of array, and all elements of array is given
 // k is the target we want to get with the help of subset of array 
 // if their exist any one subset whose sum is k then return true else return false
 public class Q14_Subset_sum_equal_to_target {

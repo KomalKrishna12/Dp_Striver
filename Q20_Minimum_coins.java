@@ -1,5 +1,5 @@
 // we have given some infinite coins which are in arr we have target T also given
-// we have to reach targwt using minimum coins
+// we have to reach target using minimum coins
 // like we have infinite coins of 1, 2, 3 and target T is 7
 // possible coins denominations
 // 1 + 1 + 1 + 1 + 1 + 1 + 1 = 7 coins

@@ -1,7 +1,6 @@
 import java.util.Scanner;
-
 // in this problem we have given a grid of m*n each box contains an amount
-// we are are top left and want to reach bottom right
+// we are at top left and want to reach bottom right
 // we have to find a path in which we can get min coin collected
 // so this is similar question like previous but here each path has cost
 // so when reach destination (0,0) return the cost of that index
