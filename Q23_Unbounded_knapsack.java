@@ -27,7 +27,7 @@ public class Q23_Unbounded_knapsack {
         // recursion
         // System.out.println(f(n-1, W, wt, val));
 
-        // memoization
+        // memoizationd
         int[][] dp = new int[n][W + 1];
 
         for (int i = 0; i <= W; i++)
