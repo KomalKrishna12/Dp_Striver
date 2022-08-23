@@ -28,28 +28,56 @@ public class Q23_Unbounded_knapsack {
         // System.out.println(f(n-1, W, wt, val));
 
         // memoizationd
-        int[][] dp = new int[n][W + 1];
+        // int[][] dp = new int[n][W + 1];
 
-        for (int i = 0; i <= W; i++)
-            dp[0][i] = (i / wt[0]) * val[0];
+        // for (int tar = 0; tar <= W; tar++)
+        //     dp[0][tar] = (tar / wt[0]) * val[0];
+
+        // for (int idx = 1; idx < n; idx++) {
+
+        //     for (int tar = 0; tar <= W; tar++) {
+
+        //         int nottake = 0 + dp[idx - 1][tar];
+
+        //         int take = Integer.MIN_VALUE;
+        //         if (wt[idx] <= tar)
+        //             take = val[idx] + dp[idx][tar - wt[idx]];
+
+        //         dp[idx][tar] = Math.max(take, nottake);
+
+        //     }
+
+        // }
+
+        // System.out.println(dp[n - 1][W]);
+
+        // space optimization
+
+        int[] prev = new int[W+1];
+        int[] curr = new int[W+1];
+
+        for (int tar = 0; tar <= W; tar++)
+            prev[tar] = (tar / wt[0]) * val[0];
 
         for (int idx = 1; idx < n; idx++) {
 
             for (int tar = 0; tar <= W; tar++) {
 
-                int nottake = 0 + dp[idx - 1][tar];
+                int nottake = 0 + prev[tar];
 
                 int take = Integer.MIN_VALUE;
                 if (wt[idx] <= tar)
-                    take = val[idx] + dp[idx][tar - wt[idx]];
+                    take = val[idx] + curr[tar - wt[idx]];
 
-                dp[idx][tar] = Math.max(take, nottake);
+                curr[tar] = Math.max(take, nottake);
 
             }
 
+            prev = curr;
+
         }
 
-        System.out.println(dp[n - 1][W]);
+        System.out.println(prev[W]);
 
     }
 
