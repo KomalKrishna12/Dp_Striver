@@ -1,8 +1,8 @@
 // given two strings s1 and s2 we have to return the longest common subsequence of both string
-// brute force approch will be like find all subsequence of s1 then s2 and compare so that will
+// brute force approch will be like find all subsequence of s1 then s2 and compare so it will
 // be too long bcoz 2^n is the possible subsequences so in this approach we use two indexes 
 // idx1 and idx2 for s1 and s2, compare both characters if matched then call fir idx1-1 and idex2-1
-// if not matched then we have two options either we can go with idx1-1 and idx2 same or idx1 same and \
+// if not matched then we have two options either we can go with idx1-1 and idx2 same or idx1 same and 
 // idx2-1 so return max of both
 // whenever any index become negetive return 0
 
