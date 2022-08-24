@@ -1,5 +1,5 @@
-// in this problem we have given a string s1 we have to give the length of longest subsequence which is 
-// pallindrome
+// in this problem we have given a string s1 we have to return the length of longest subsequence
+// which is pallindrome
 // to solve this we were using same approach of longest common subsequence in which we have two strings
 // so we create another string and set it as reverse of string s1 which is given and pass both in
 // longest common subsequence problem it'll return length of longest substring

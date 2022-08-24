@@ -15,33 +15,33 @@ public class Q27_longest_common_substring {
 
 
         // tabulation
-        // int[][] dp = new int[n+1][m+1];
+        int[][] dp = new int[n+1][m+1];
 
-        // int ans = 0;
+        int ans = 0;
 
-        // for(int idx1 = 1; idx1 <= n; idx1++){
+        for(int idx1 = 1; idx1 <= n; idx1++){
 
-        //     for(int idx2 = 1; idx2 <= m; idx2++){
+            for(int idx2 = 1; idx2 <= m; idx2++){
 
-        //         if(s1.charAt(idx1 - 1) == s2.charAt(idx2 - 1)){
+                if(s1.charAt(idx1 - 1) == s2.charAt(idx2 - 1)){
 
-        //             dp[idx1][idx2] = 1 + dp[idx1 - 1][idx2 - 1];
+                    dp[idx1][idx2] = 1 + dp[idx1 - 1][idx2 - 1];
 
-        //             ans = Math.max(ans, dp[idx1][idx2]);
+                    ans = Math.max(ans, dp[idx1][idx2]);
 
-        //         }
+                }
 
-        //         else {
+                else {
 
-        //             dp[idx1][idx2] = 0;
+                    dp[idx1][idx2] = 0;
 
-        //         }
+                }
 
-        //     }
+            }
 
-        // }
+        }
 
-        // System.out.println(ans);
+        System.out.println(ans);
 
     }
 }
