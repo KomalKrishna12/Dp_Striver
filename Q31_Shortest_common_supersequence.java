@@ -14,7 +14,7 @@ public class Q31_Shortest_common_supersequence {
 
         int n = s1.length();
         int m = s2.length();
-
+ 
         int[][] dp = new int[n+1][m+1];
 
         for(int idx1 = 1; idx1 <= n; idx1++){
