@@ -22,7 +22,7 @@ public class Q32_Distinct_subsequence {
                 if(s1.charAt(i-1) == s2.charAt(j-1)){
                     dp[i][j] = dp[i-1][j-1] + dp[i-1][j];
                 }
-                else dp[i][j] = dp[i-1][j];
+                else dp[i][j] = dp[i-1][j];  
 
             }
 
