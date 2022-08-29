@@ -1,4 +1,4 @@
-// in this question we can buy multiple stock and sell the mutiple stocks
+// In this question we can buy multiple stock and sell the mutiple stocks
 // if we buy one stock then we cannot buy second until first stock sell out
 // so we use a variable b if 1 that means no buy stock so we can buy the stock
 // if 0 that means we cannot buy we can only sell or leave it
@@ -52,7 +52,7 @@ public class Q36_Buy_and_sell_stock_II {
         // tabulation
         int[][] dp = new int[n+1][2];   
 
-        dp[n][0] = dp[n][1] = 0;
+        dp[n][0] = dp[n][1] = 0; // base case 
 
         for(int i = n-1; i >= 0; i--){
 

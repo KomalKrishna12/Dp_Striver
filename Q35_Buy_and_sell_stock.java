@@ -1,5 +1,5 @@
 // given an array which denotes we have diff rate in diff days
-// we want to buy and sell the stock with maximum profit or the best time to but and sell
+// we want to buy and sell the stock with maximum profit or the best time to buy and sell
 // to get max profit we have to buy the stock in min price and sell it on high
 public class Q35_Buy_and_sell_stock{
     public static void main(String[] args) {
