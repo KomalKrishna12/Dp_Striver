@@ -1,6 +1,6 @@
 // given two string s1 and s2 we have to check wheather they are matching or not
 // in s1 we can have '*' and '?' if '*' that means it can match with string of len 0 or more than 0
-// if '?' means it can match with single aqny character
+// if '?' means it can match with single any character
 // ex : s1 :"abc?df", s2 : "abcgdf"
 // every char are similar except '?' it can match with 'g' 
 // ex2 : s1 : "**ab", s2 : "ab" this is also matching bcoz '*' can match with string of len 0 also
@@ -19,18 +19,20 @@ public class Q34_Wildcard_matching {
 
         if(i >= 0 && j < 0){
 
-            boolean flag = true;
+            // boolean flag = true;
 
             for(int ii = 0; ii <= i; ii++) {
 
                 if(s1.charAt(ii) != '*') {
-                    flag = false;
-                    break;
+                    // flag = false;
+                    // break;
+                    return false;
                 }
 
             }
 
-            return flag;
+           // return flag;
+           return true;
 
         }
 
