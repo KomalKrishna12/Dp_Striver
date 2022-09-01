@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-// in this ques we have given an array and w have to find out the length of longest increasing subsequence
+// in this ques we have given an array and we have to find out the length of longest increasing subsequence
 // we use same take not take approch and we use a prev_idx to compare the curr idx
 // bcoz we need subsequence in increasing order
 public class Q41_Longest_increasing_subsequence {
@@ -15,8 +15,7 @@ public class Q41_Longest_increasing_subsequence {
         int len = 0 + f(idx + 1, prev_idx, arr, n);
 
         // for take check that the curr idx val is greater than prev idx val or not or
-        // if
-        // prev_idx == -1 than also take bcoz it's first idx
+        // if  prev_idx == -1 than also take bcoz it's first idx
         if (prev_idx == -1 || arr[idx] > arr[prev_idx]) {
             len = Math.max(len, 1 + f(idx + 1, idx, arr, n));
         }
@@ -128,9 +127,9 @@ public class Q41_Longest_increasing_subsequence {
 
         //     for(int prev = 0; prev < idx; prev++){
 
-        //         if(arr[idx] > arr[prev]){
+        //         if(arr[idx] > arr[prev] && dp[idx] < 1 + dp[prev]){
 
-        //             dp[idx] = Math.max(dp[idx], 1 + dp[prev]);
+        //             dp[idx] = 1 + dp[prev];
 
         //         }
 
