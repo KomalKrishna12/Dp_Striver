@@ -1,5 +1,6 @@
 public class Q50_Evaluate_boolean_expression_to_true {
-    static int mod = 1000000007;
+    // static int mod = 1000000007;
+    static int mod = 1003;
 
     public static int f(int i, int j, String s, int isTrue, Integer[][][] dp) {
         if (i > j)
@@ -45,7 +46,7 @@ public class Q50_Evaluate_boolean_expression_to_true {
     }
 
     public static void main(String[] args) {
-        String s = "F|T^F";
+        String s = "T|F^F&T|F^F^F^T|T&T^T|F^T^F&F^T|T^F";
         int j = s.length();
 
         // recursion & memoization
